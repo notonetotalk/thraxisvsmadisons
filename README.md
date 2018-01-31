@@ -14,7 +14,7 @@ Go to the bottom of this document for the [TL;DR](#tldr).
 
 A method's speed is determined by its chances of using a greater or smaller number of steps to arrive at the correct code. The following is a breakdown of the number of steps involved in each method and the method's chances of using that number of steps.
 
-### Chances after `AAA -> 0 -> BBB -> 1-2`
+### Chances after `AAA -> 0 -> BBB -> 1/2`
 
 #### Thraxis:
 
