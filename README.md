@@ -36,7 +36,7 @@ Average number of steps for correct outcome: 2.00
 
 Speed difference: 0%
 
-### Chances after `AAA -> 1`
+### Chances after `AAA -> 1 -> BBB/ABC`
 
 #### Thraxis:
 
@@ -61,7 +61,7 @@ Average number of steps for correct outcome: 1.82
 
 Speed difference: 19.19%
 
-### Chances after `AAA -> 2`
+### Chances after `AAA -> 2 -> AAB/ABC`
 
 #### Thraxis:
 
