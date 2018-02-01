@@ -1,6 +1,15 @@
+import 'dart:html';
 import 'dart:math';
 
 void main() {
+
+		querySelector("#button").onClick.listen(getNum);
+
+}
+
+void getNum(MouseEvent event) {
+
+	int rounds = int.parse((querySelector("#num") as InputElement).value);
 
 	// The following is a list of possible codes and the corresponding number of
 	// steps for each given method to solve it. stepsT contains the method speed
@@ -11,26 +20,34 @@ void main() {
 	// Initalize totals for adding up.
 	int stpTotalT = 0;
 	int stpTotalM = 0;
+	String outputText = "";
 
 	// Loops through 100 randomized codes and prints out the number of total steps
 	// for each method to solve it individually, and keeps track of totals.
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < rounds; i++) {
 		String code = rndCode();
 		int stpT = stepsT[code];
 		int stpM = stepsM[code];
 		stpTotalT = stpTotalT + stpT;
 		stpTotalM = stpTotalM + stpM;
-		print(code);
-		print("Thraxis: $stpT");
-		print("Madison's: $stpM\n");
+		outputText = outputText + "${code}\nThraxis: ${stpT}\nMadison's: ${stpM}\n\n";
+		//print(code);
+		//print("Thraxis: $stpT");
+		//print("Madison's: $stpM\n");
 	}
 
 	// Calculates average number of steps taken for each method and prints to
 	// screen.
-	print("Average steps");
-	print("-------------");
-	print("Thraxis: ${stpTotalT / 100}");
-	print("Madison's: ${stpTotalM / 100}");
+	//print("Average steps");
+	//print("-------------");
+	//print("Thraxis: ${stpTotalT / 100}");
+	//print("Madison's: ${stpTotalM / 100}");
+	outputText = outputText + "Average steps\n";
+	outputText = outputText + "-------------\n";
+	outputText = outputText + "Thraxis: ${stpTotalT / rounds}\n";
+	outputText = outputText + "Madison's: ${stpTotalM / rounds}";
+
+	querySelector("#output").text = outputText;
 
 }
 
