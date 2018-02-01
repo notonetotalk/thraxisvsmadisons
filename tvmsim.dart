@@ -31,13 +31,11 @@ void main() {
 }
 
 String rndCode() {
-	List ltrs = ["A","B","C"];
-	Random rnd = new Random();
-	int min = 0;
-	int max = 3;
+	final List ltrs = ["A","B","C"];
+	final Random rnd = new Random();
 	String code = "";
 	for (int i = 0; i < 3; i++) {
-		code = code + ltrs[min + rnd.nextInt(max - min)];
+		code = code + ltrs[rnd.nextInt(3)];
 	}
 	return code;
 }
