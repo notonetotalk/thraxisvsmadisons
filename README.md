@@ -135,11 +135,15 @@ Speed difference: 6.86%
 
 - Madison's is 6.86% faster overall compared to the Thraxis method.
 
----
+## Try it out for yourself
+
+If for some reason you're still not convinced, you can run a simulation of the methods using [this web application](https://notonetotalk.github.io/thraxisvsmadisons/tvmsim). It runs through a user-specified number of rounds, generating random codes. The application tallies the amount of steps it takes for each method to arrive at the correct outcome, and calculates the averages. You can try simulating 10 rounds a few times, or maybe a 1,000. The web application's source code can be viewed [here](https://github.com/notonetotalk/thraxisvsmadisons/blob/master/tvmsim.dart).
+
+## Credits
 
 Thanks for reading, and play nice.
 
-This document was written by notonetotalk.
+This document and simulation web application was written by notonetotalk.
 
 Discord: notonetotalk#4849
 

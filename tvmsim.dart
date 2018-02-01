@@ -23,8 +23,8 @@ void getNum(MouseEvent event) {
 	int stpTotalM = 0;
 	String outputText = "";
 
-	// Loops through randomized codes and prints out the number of total steps
-	// for each method to solve it individually, and keeps track of totals.
+	// Loops through randomized codes and tallies the number of steps
+	// necessary for each method to solve it, and keeps track of totals.
 	for (int i = 0; i < rounds; i++) {
 		String code = rndCode();
 		int stpT = stepsT[code];
