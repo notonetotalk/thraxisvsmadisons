@@ -13,7 +13,7 @@ void main() {
 	int stpttl2 = 0;
 
 	// Loops through 100 randomized codes and prints out the number of total steps
-	// for each method to solve it, individually, and in total.
+	// for each method to solve it individually, and keeps track of total.
 	for (int i = 0; i < 100; i++) {
 		String code = rndCode();
 		int stp1 = steps1[code];
@@ -21,7 +21,6 @@ void main() {
 		stpttl1 = stpttl1 + stp1;
 		stpttl2 = stpttl2 + stp2;
 		print(code);
-		print("---");
 		print("Thraxis: $stp1");
 		print("Madison's: $stp2\n");
 	}
