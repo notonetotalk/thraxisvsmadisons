@@ -9,6 +9,7 @@ void main() {
 
 void getNum(MouseEvent event) {
 
+	// Get number input from textfield.
 	int rounds = int.parse((querySelector("#num") as InputElement).value);
 
 	// The following is a list of possible codes and the corresponding number of
@@ -22,7 +23,7 @@ void getNum(MouseEvent event) {
 	int stpTotalM = 0;
 	String outputText = "";
 
-	// Loops through 100 randomized codes and prints out the number of total steps
+	// Loops through randomized codes and prints out the number of total steps
 	// for each method to solve it individually, and keeps track of totals.
 	for (int i = 0; i < rounds; i++) {
 		String code = rndCode();
@@ -30,7 +31,9 @@ void getNum(MouseEvent event) {
 		int stpM = stepsM[code];
 		stpTotalT = stpTotalT + stpT;
 		stpTotalM = stpTotalM + stpM;
-		outputText = outputText + "${code}\nThraxis: ${stpT}\nMadison's: ${stpM}\n\n";
+		outputText = outputText + "${code}\n";
+		outputText = outputText + "Thraxis: ${stpT}\n";
+		outputText = outputText + "Madison's: ${stpM}\n\n";
 		//print(code);
 		//print("Thraxis: $stpT");
 		//print("Madison's: $stpM\n");

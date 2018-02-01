@@ -6499,7 +6499,7 @@
         if (typeof stpM !== "number")
           return H.iae(stpM);
         stpTotalM += stpM;
-        outputText += code + "\nThraxis: " + H.S(stpT) + "\nMadison's: " + H.S(stpM) + "\n\n";
+        outputText = outputText + (code + "\n") + ("Thraxis: " + H.S(stpT) + "\n") + ("Madison's: " + H.S(stpM) + "\n\n");
       }
       outputText = outputText + "Average steps\n-------------\n" + ("Thraxis: " + H.S(stpTotalT / rounds) + "\n") + ("Madison's: " + H.S(stpTotalM / rounds));
       t1.querySelector("#output").textContent = outputText;
