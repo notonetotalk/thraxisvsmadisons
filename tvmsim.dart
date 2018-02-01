@@ -3,11 +3,11 @@ import 'dart:math';
 
 void main() {
 
-		querySelector("#button").onClick.listen(getNum);
+		querySelector("#button").onClick.listen(simulate);
 
 }
 
-void getNum(MouseEvent event) {
+void simulate(MouseEvent event) {
 
 	// Get number input from textfield.
 	int rounds = int.parse((querySelector("#num") as InputElement).value);

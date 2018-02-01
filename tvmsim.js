@@ -6475,9 +6475,9 @@
     "^": "",
     main: [function() {
       var t1 = J.get$onClick$x(document.querySelector("#button"));
-      W._EventStreamSubscription$(t1._html$_target, t1._eventType, Z.tvmsim__getNum$closure(), false, H.getTypeArgumentByIndex(t1, 0));
+      W._EventStreamSubscription$(t1._html$_target, t1._eventType, Z.tvmsim__simulate$closure(), false, H.getTypeArgumentByIndex(t1, 0));
     }, "call$0", "tvmsim__main$closure", 0, 0, 1],
-    getNum: [function($event) {
+    simulate: [function($event) {
       var t1, rounds, stepsT, stepsM, stpTotalT, stpTotalM, outputText, i, code, stpT, stpM;
       t1 = document;
       rounds = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#num"), "$isInputElement").value, null, null);
@@ -6503,7 +6503,7 @@
       }
       outputText = outputText + "Average steps\n-------------\n" + ("Thraxis: " + H.S(stpTotalT / rounds) + "\n") + ("Madison's: " + H.S(stpTotalM / rounds));
       t1.querySelector("#output").textContent = outputText;
-    }, "call$1", "tvmsim__getNum$closure", 2, 0, 12],
+    }, "call$1", "tvmsim__simulate$closure", 2, 0, 12],
     rndCode: function() {
       var ltrs, code, i, t1;
       ltrs = ["A", "B", "C"];
