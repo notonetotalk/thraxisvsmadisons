@@ -26,6 +26,7 @@ void simulate(MouseEvent event) {
 	// Loops through randomized codes and tallies the number of steps
 	// necessary for each method to solve it, and keeps track of totals.
 	for (int i = 0; i < rounds; i++) {
+
 		String code = rndCode();
 		int stpT = stepsT[code];
 		int stpM = stepsM[code];
@@ -34,33 +35,31 @@ void simulate(MouseEvent event) {
 		outputText = outputText + "${code}\n";
 		outputText = outputText + "Thraxis: ${stpT}\n";
 		outputText = outputText + "Madison's: ${stpM}\n\n";
-		//print(code);
-		//print("Thraxis: $stpT");
-		//print("Madison's: $stpM\n");
+
 	}
 
-	// Calculates average number of steps taken for each method and prints to
-	// screen.
-	//print("Average steps");
-	//print("-------------");
-	//print("Thraxis: ${stpTotalT / 100}");
-	//print("Madison's: ${stpTotalM / 100}");
+	// Calculates average number of steps taken for each method.
 	outputText = outputText + "Average steps\n";
 	outputText = outputText + "-------------\n";
 	outputText = outputText + "Thraxis: ${stpTotalT / rounds}\n";
 	outputText = outputText + "Madison's: ${stpTotalM / rounds}";
 
+	// Outputs results to webpage.
 	querySelector("#output").text = outputText;
 
 }
 
 // Generates random code for our given methods to solve.
 String rndCode() {
+
 	final List ltrs = ["A","B","C"];
 	final Random rnd = new Random();
 	String code = "";
 	for (int i = 0; i < 3; i++) {
+
 		code = code + ltrs[rnd.nextInt(3)];
+
 	}
 	return code;
+
 }
