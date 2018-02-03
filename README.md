@@ -149,4 +149,6 @@ Discord: notonetotalk#4849
 
 FreeSO sim names: Nell, Ishmael, Eshel
 
+Also check out the [CBU AutoLeader](https://git.io/CBUAL).
+
 You can download this document as a [markdown text file](https://raw.githubusercontent.com/notonetotalk/thraxisvsmadisons/master/thraxisvsmadisons.md).
