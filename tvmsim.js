@@ -818,7 +818,8 @@
       substring$2: function(receiver, startIndex, endIndex) {
         if (endIndex == null)
           endIndex = receiver.length;
-        H.checkInt(endIndex);
+        if (typeof endIndex !== "number" || Math.floor(endIndex) !== endIndex)
+          H.throwExpression(H.argumentErrorValue(endIndex));
         if (startIndex < 0)
           throw H.wrapException(P.RangeError$value(startIndex, null, null));
         if (typeof endIndex !== "number")
@@ -2123,11 +2124,6 @@
     },
     argumentErrorValue: function(object) {
       return new P.ArgumentError(true, object, null, null);
-    },
-    checkInt: function(value) {
-      if (typeof value !== "number" || Math.floor(value) !== value)
-        throw H.wrapException(H.argumentErrorValue(value));
-      return value;
     },
     checkString: function(value) {
       if (typeof value !== "string")
@@ -5997,6 +5993,18 @@
       hash = 536870911 & hash + ((524287 & hash) << 10);
       return hash ^ hash >>> 6;
     },
+    _convertNativeToDart_EventTarget: function(e) {
+      var $window;
+      if (e == null)
+        return;
+      if ("postMessage" in e) {
+        $window = W._DOMWindowCrossFrame__createSafe(e);
+        if (!!J.getInterceptor($window).$isEventTarget)
+          return $window;
+        return;
+      } else
+        return e;
+    },
     _wrapZone: function(callback) {
       var t1 = $.Zone__current;
       if (t1 === C.C__RootZone)
@@ -6005,10 +6013,10 @@
     },
     HtmlElement: {
       "^": "Element;",
-      "%": "HTMLBRElement|HTMLBaseElement|HTMLButtonElement|HTMLCanvasElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDialogElement|HTMLDirectoryElement|HTMLDivElement|HTMLEmbedElement|HTMLFieldSetElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLIFrameElement|HTMLImageElement|HTMLKeygenElement|HTMLLIElement|HTMLLabelElement|HTMLLegendElement|HTMLLinkElement|HTMLMapElement|HTMLMarqueeElement|HTMLMenuElement|HTMLMenuItemElement|HTMLMetaElement|HTMLMeterElement|HTMLModElement|HTMLOListElement|HTMLObjectElement|HTMLOptGroupElement|HTMLOptionElement|HTMLOutputElement|HTMLParagraphElement|HTMLParamElement|HTMLPictureElement|HTMLPreElement|HTMLProgressElement|HTMLQuoteElement|HTMLScriptElement|HTMLShadowElement|HTMLSlotElement|HTMLSourceElement|HTMLSpanElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableDataCellElement|HTMLTableElement|HTMLTableHeaderCellElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTemplateElement|HTMLTextAreaElement|HTMLTitleElement|HTMLTrackElement|HTMLUListElement|HTMLUnknownElement;HTMLElement"
+      "%": "HTMLBRElement|HTMLButtonElement|HTMLCanvasElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDialogElement|HTMLDirectoryElement|HTMLDivElement|HTMLEmbedElement|HTMLFieldSetElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLIFrameElement|HTMLImageElement|HTMLKeygenElement|HTMLLIElement|HTMLLabelElement|HTMLLegendElement|HTMLLinkElement|HTMLMapElement|HTMLMarqueeElement|HTMLMenuElement|HTMLMenuItemElement|HTMLMetaElement|HTMLMeterElement|HTMLModElement|HTMLOListElement|HTMLObjectElement|HTMLOptGroupElement|HTMLOptionElement|HTMLOutputElement|HTMLParagraphElement|HTMLParamElement|HTMLPictureElement|HTMLPreElement|HTMLProgressElement|HTMLQuoteElement|HTMLScriptElement|HTMLShadowElement|HTMLSlotElement|HTMLSourceElement|HTMLSpanElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableDataCellElement|HTMLTableElement|HTMLTableHeaderCellElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTemplateElement|HTMLTextAreaElement|HTMLTitleElement|HTMLTrackElement|HTMLUListElement|HTMLUnknownElement;HTMLElement"
     },
     AnchorElement: {
-      "^": "HtmlElement;",
+      "^": "HtmlElement;target=",
       toString$0: function(receiver) {
         return String(receiver);
       },
@@ -6016,22 +6024,27 @@
       "%": "HTMLAnchorElement"
     },
     AreaElement: {
-      "^": "HtmlElement;",
+      "^": "HtmlElement;target=",
       toString$0: function(receiver) {
         return String(receiver);
       },
       $isInterceptor: 1,
       "%": "HTMLAreaElement"
     },
+    BaseElement: {
+      "^": "HtmlElement;target=",
+      "%": "HTMLBaseElement"
+    },
     BodyElement: {
       "^": "HtmlElement;",
+      $isEventTarget: 1,
       $isInterceptor: 1,
       "%": "HTMLBodyElement"
     },
     CharacterData: {
       "^": "Node;length=",
       $isInterceptor: 1,
-      "%": "CDATASection|CharacterData|Comment|ProcessingInstruction|Text"
+      "%": "CDATASection|Comment|Text;CharacterData"
     },
     DocumentFragment: {
       "^": "Node;",
@@ -6050,10 +6063,14 @@
       toString$0: function(receiver) {
         return receiver.localName;
       },
+      get$onChange: function(receiver) {
+        return new W._ElementEventStreamImpl(receiver, "change", false, [W.Event]);
+      },
       get$onClick: function(receiver) {
         return new W._ElementEventStreamImpl(receiver, "click", false, [W.MouseEvent]);
       },
       $isInterceptor: 1,
+      $isEventTarget: 1,
       "%": ";Element"
     },
     ErrorEvent: {
@@ -6062,6 +6079,11 @@
     },
     Event: {
       "^": "Interceptor;",
+      get$target: function(receiver) {
+        return W._convertNativeToDart_EventTarget(receiver.target);
+      },
+      $isEvent: 1,
+      $isObject: 1,
       "%": "AnimationEvent|AnimationPlayerEvent|ApplicationCacheErrorEvent|AudioProcessingEvent|AutocompleteErrorEvent|BeforeInstallPromptEvent|BeforeUnloadEvent|BlobEvent|ClipboardEvent|CloseEvent|CustomEvent|DeviceLightEvent|DeviceMotionEvent|DeviceOrientationEvent|ExtendableEvent|ExtendableMessageEvent|FetchEvent|FontFaceSetLoadEvent|GamepadEvent|GeofencingEvent|HashChangeEvent|IDBVersionChangeEvent|InstallEvent|MIDIConnectionEvent|MIDIMessageEvent|MediaEncryptedEvent|MediaKeyMessageEvent|MediaQueryListEvent|MediaStreamEvent|MediaStreamTrackEvent|MessageEvent|NotificationEvent|OfflineAudioCompletionEvent|PageTransitionEvent|PopStateEvent|PresentationConnectionAvailableEvent|PresentationConnectionCloseEvent|ProgressEvent|PromiseRejectionEvent|PushEvent|RTCDTMFToneChangeEvent|RTCDataChannelEvent|RTCIceCandidateEvent|RTCPeerConnectionIceEvent|RelatedEvent|ResourceProgressEvent|SecurityPolicyViolationEvent|ServicePortConnectEvent|ServiceWorkerMessageEvent|SpeechRecognitionEvent|SpeechSynthesisEvent|StorageEvent|SyncEvent|TrackEvent|TransitionEvent|USBConnectionEvent|WebGLContextEvent|WebKitTransitionEvent;Event|InputEvent"
     },
     EventTarget: {
@@ -6072,16 +6094,20 @@
       _removeEventListener$3: function(receiver, type, listener, options) {
         return receiver.removeEventListener(type, H.convertDartClosureToJS(listener, 1), false);
       },
+      $isEventTarget: 1,
       "%": "MediaStream|MessagePort;EventTarget"
     },
     FormElement: {
-      "^": "HtmlElement;length=",
+      "^": "HtmlElement;length=,target=",
       "%": "HTMLFormElement"
     },
     InputElement: {
       "^": "HtmlElement;",
       $isInputElement: 1,
       $isInterceptor: 1,
+      $isEventTarget: 1,
+      $isRadioButtonInputElement: 1,
+      $isCheckboxInputElement: 1,
       "%": "HTMLInputElement"
     },
     MediaElement: {
@@ -6091,6 +6117,7 @@
     MouseEvent: {
       "^": "UIEvent;",
       $isMouseEvent: 1,
+      $isEvent: 1,
       $isObject: 1,
       "%": "DragEvent|MouseEvent|PointerEvent|WheelEvent"
     },
@@ -6107,6 +6134,10 @@
       },
       "%": "Attr|Document|HTMLDocument|XMLDocument;Node"
     },
+    ProcessingInstruction: {
+      "^": "CharacterData;target=",
+      "%": "ProcessingInstruction"
+    },
     SelectElement: {
       "^": "HtmlElement;length=",
       "%": "HTMLSelectElement"
@@ -6122,6 +6153,7 @@
     Window: {
       "^": "EventTarget;",
       $isInterceptor: 1,
+      $isEventTarget: 1,
       "%": "DOMWindow|Window"
     },
     _ClientRect: {
@@ -6178,11 +6210,13 @@
     },
     _HTMLFrameSetElement: {
       "^": "HtmlElement;",
+      $isEventTarget: 1,
       $isInterceptor: 1,
       "%": "HTMLFrameSetElement"
     },
     _ServiceWorker: {
       "^": "EventTarget;",
+      $isEventTarget: 1,
       $isInterceptor: 1,
       "%": "ServiceWorker"
     },
@@ -6262,6 +6296,19 @@
       call$1: function(e) {
         return this.onData.call$1(e);
       }
+    },
+    _DOMWindowCrossFrame: {
+      "^": "Object;_window",
+      $isEventTarget: 1,
+      $isInterceptor: 1,
+      static: {
+        _DOMWindowCrossFrame__createSafe: function(w) {
+          if (w === window)
+            return w;
+          else
+            return new W._DOMWindowCrossFrame(w);
+        }
+      }
     }
   }], ["dart.dom.indexed_db", "dart:indexed_db",, P, {
     "^": ""
@@ -6278,7 +6325,7 @@
   }], ["dart.dom.svg", "dart:svg",, P, {
     "^": "",
     AElement: {
-      "^": "GraphicsElement;",
+      "^": "GraphicsElement;target=",
       $isInterceptor: 1,
       "%": "SVGAElement"
     },
@@ -6404,9 +6451,13 @@
     },
     SvgElement: {
       "^": "Element;",
+      get$onChange: function(receiver) {
+        return new W._ElementEventStreamImpl(receiver, "change", false, [W.Event]);
+      },
       get$onClick: function(receiver) {
         return new W._ElementEventStreamImpl(receiver, "click", false, [W.MouseEvent]);
       },
+      $isEventTarget: 1,
       $isInterceptor: 1,
       "%": "SVGComponentTransferFunctionElement|SVGDescElement|SVGDiscardElement|SVGFEDistantLightElement|SVGFEFuncAElement|SVGFEFuncBElement|SVGFEFuncGElement|SVGFEFuncRElement|SVGFEMergeNodeElement|SVGFEPointLightElement|SVGFESpotLightElement|SVGMetadataElement|SVGStopElement|SVGStyleElement|SVGTitleElement;SVGElement"
     },
@@ -6468,22 +6519,39 @@
   }], ["", "tvmsim.dart",, Z, {
     "^": "",
     main: [function() {
-      var t1 = J.get$onClick$x(document.querySelector("#button"));
-      W._EventStreamSubscription$(t1._html$_target, t1._eventType, Z.tvmsim__simulate$closure(), false, H.getTypeArgumentByIndex(t1, 0));
+      var t1, t2;
+      t1 = document;
+      t2 = J.get$onClick$x(t1.querySelector("#button"));
+      W._EventStreamSubscription$(t2._html$_target, t2._eventType, Z.tvmsim__simulate$closure(), false, H.getTypeArgumentByIndex(t2, 0));
+      t2 = J.get$onChange$x(t1.querySelector("#radioScope0"));
+      W._EventStreamSubscription$(t2._html$_target, t2._eventType, Z.tvmsim__updateScope$closure(), false, H.getTypeArgumentByIndex(t2, 0));
+      t2 = J.get$onChange$x(t1.querySelector("#radioScope1"));
+      W._EventStreamSubscription$(t2._html$_target, t2._eventType, Z.tvmsim__updateScope$closure(), false, H.getTypeArgumentByIndex(t2, 0));
+      t1 = J.get$onChange$x(t1.querySelector("#radioScope2"));
+      W._EventStreamSubscription$(t1._html$_target, t1._eventType, Z.tvmsim__updateScope$closure(), false, H.getTypeArgumentByIndex(t1, 0));
     }, "call$0", "tvmsim__main$closure", 0, 0, 1],
     simulate: [function($event) {
-      var t1, rounds, j, stpTotalT, stpTotalM, outputText, i, code, stpT, stpM;
+      var t1, rounds, limitScope, j, t2, stpTotalT, stpTotalM, outputText, i, code, stpT, stpM;
       t1 = document;
       rounds = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#num"), "$isInputElement").value, null, null);
+      limitScope = H.interceptedTypeCast(t1.querySelector("#limitScope"), "$isCheckboxInputElement").checked;
+      Z.updateScope(null);
+      P.print("Scope: " + H.S($.scope));
+      P.print("Limit scope? " + H.S(limitScope));
       j = J.$add$ns(rounds, 1);
       if (typeof j !== "number")
         return H.iae(j);
+      t2 = limitScope === true;
       stpTotalT = 0;
       stpTotalM = 0;
       outputText = "";
       i = 1;
       for (; i < j; ++i) {
-        code = Z.rndCode();
+        if (t2)
+          for (code = "AAA"; code.split("A").length !== $.scope;)
+            code = Z.rndCode();
+        else
+          code = Z.rndCode();
         stpT = $.$get$stepsT().$index(0, code);
         stpM = $.$get$stepsM().$index(0, code);
         if (typeof stpT !== "number")
@@ -6492,22 +6560,37 @@
         if (typeof stpM !== "number")
           return H.iae(stpM);
         stpTotalM += stpM;
-        outputText = outputText + ("Round " + i + ": " + code + "\n") + ("Thraxis:   " + stpT + ", total: " + stpTotalT + "\n") + ("Madison's: " + stpM + ", total: " + stpTotalM + "\n\n");
+        outputText = outputText + ("\n\nRound " + i + ": " + code + "\n") + ("Thraxis:   " + stpT + ", total: " + stpTotalT + "\n") + ("Madison's: " + stpM + ", total: " + stpTotalM);
       }
-      outputText += "---END---";
       if (typeof rounds !== "number")
         return H.iae(rounds);
-      outputText = "Average steps\n-------------\nThraxis:   " + H.S(stpTotalT / rounds) + "\nMadison's: " + H.S(stpTotalM / rounds) + "\n-------------\n\n" + outputText;
+      outputText = "Average steps\n-------------\nThraxis:   " + H.S(stpTotalT / rounds) + "\nMadison's: " + H.S(stpTotalM / rounds) + "\n-------------" + outputText;
       t1.querySelector("#output").textContent = outputText;
     }, "call$1", "tvmsim__simulate$closure", 2, 0, 12],
+    updateScope: [function($event) {
+      var t1;
+      if ($event != null)
+        $.scope = H.Primitives_parseInt(H.interceptedTypeCast(J.get$target$x($event), "$isRadioButtonInputElement").value, null, null);
+      else {
+        t1 = document;
+        if (H.interceptedTypeCast(t1.querySelector("#radioScope0"), "$isRadioButtonInputElement").checked === true)
+          $.scope = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#radioScope0"), "$isRadioButtonInputElement").value, null, null);
+        else if (H.interceptedTypeCast(t1.querySelector("#radioScope1"), "$isRadioButtonInputElement").checked === true)
+          $.scope = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#radioScope1"), "$isRadioButtonInputElement").value, null, null);
+        else if (H.interceptedTypeCast(t1.querySelector("#radioScope2"), "$isRadioButtonInputElement").checked === true)
+          $.scope = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#radioScope2"), "$isRadioButtonInputElement").value, null, null);
+      }
+    }, function() {
+      return Z.updateScope(null);
+    }, "call$1", "call$0", "tvmsim__updateScope$closure", 0, 2, 13, 0],
     rndCode: function() {
-      var ltrs, code, i, t1;
-      ltrs = ["A", "B", "C"];
+      var code, i, t1, t2;
       for (code = "", i = 0; i < 3; ++i) {
-        t1 = C.C__JSRandom.nextInt$1(3);
-        if (t1 < 0 || t1 >= 3)
-          return H.ioore(ltrs, t1);
-        code += ltrs[t1];
+        t1 = $.$get$ltrs();
+        t2 = $.$get$rnd().nextInt$1(3);
+        if (t2 < 0 || t2 >= 3)
+          return H.ioore(t1, t2);
+        code += t1[t2];
       }
       return code;
     }
@@ -6608,8 +6691,14 @@
   J.get$length$asx = function(receiver) {
     return J.getInterceptor$asx(receiver).get$length(receiver);
   };
+  J.get$onChange$x = function(receiver) {
+    return J.getInterceptor$x(receiver).get$onChange(receiver);
+  };
   J.get$onClick$x = function(receiver) {
     return J.getInterceptor$x(receiver).get$onClick(receiver);
+  };
+  J.get$target$x = function(receiver) {
+    return J.getInterceptor$x(receiver).get$target(receiver);
   };
   J.$add$ns = function(receiver, a0) {
     if (typeof receiver == "number" && typeof a0 == "number")
@@ -6804,6 +6893,7 @@
   $._isInCallbackLoop = false;
   $.Zone__current = C.C__RootZone;
   $.Expando__keyCount = 0;
+  $.scope = null;
   $ = null;
   init.isHunkLoaded = function(hunkHash) {
     return !!$dart_deferred_initializers$[hunkHash];
@@ -6910,11 +7000,15 @@
     return P.LinkedHashMap__makeLiteral(["AAA", 1, "AAB", 2, "AAC", 3, "ABA", 3, "ABB", 3, "ABC", 3, "ACA", 4, "ACB", 4, "ACC", 3, "BAA", 4, "BAB", 4, "BAC", 6, "BBA", 5, "BBB", 2, "BBC", 3, "BCA", 4, "BCB", 4, "BCC", 3, "CAA", 5, "CAB", 5, "CAC", 4, "CBA", 5, "CBB", 5, "CBC", 4, "CCA", 5, "CCB", 5, "CCC", 3]);
   }, "stepsT", "stepsM", "$get$stepsM", function() {
     return P.LinkedHashMap__makeLiteral(["AAA", 1, "AAB", 3, "AAC", 4, "ABA", 3, "ABB", 3, "ABC", 2, "ACA", 4, "ACB", 4, "ACC", 4, "BAA", 3, "BAB", 3, "BAC", 4, "BBA", 3, "BBB", 2, "BBC", 4, "BCA", 4, "BCB", 4, "BCC", 4, "CAA", 4, "CAB", 4, "CAC", 5, "CBA", 4, "CBB", 4, "CBC", 4, "CCA", 4, "CCB", 4, "CCC", 3]);
-  }, "stepsM"]);
+  }, "stepsM", "ltrs", "$get$ltrs", function() {
+    return ["A", "B", "C"];
+  }, "ltrs", "rnd", "$get$rnd", function() {
+    return C.C__JSRandom;
+  }, "rnd"]);
   Isolate = Isolate.$finishIsolateConstructor(Isolate);
   $ = new Isolate();
   init.metadata = [null];
-  init.types = [{func: 1}, {func: 1, v: true}, {func: 1, args: [,]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, ret: P.bool, args: [W.MouseEvent]}];
+  init.types = [{func: 1}, {func: 1, v: true}, {func: 1, args: [,]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, ret: P.bool, args: [W.MouseEvent]}, {func: 1, opt: [W.Event]}];
   function convertToFastObject(properties) {
     function MyClass() {
     }

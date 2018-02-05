@@ -96,6 +96,7 @@ body {
   height:400px;
   min-height:400px;
   font-size:14px;
+  margin:15px 0px 15px 0px;
 }
 .button{
   width:100%;
@@ -186,4 +187,11 @@ body{
   .button{
     max-width:138px;
   }
+}
+.label{
+  width:100%;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:14px;
+  margin:0px 10px 0px 2px;
+  color:#545454;
 }

@@ -13,6 +13,16 @@
 			<div class="form-group">
 				<input placeholder="# of rounds" type="text" class="input" id="num" pattern="[0-9]{1,10}" required/><button class="button" id="button">Simulate</button>
 			</div>
+  <div class="form-group">
+    <input type="checkbox" id="limitScope" class="checkbox"/>
+    <label for="limitScope" class="label">Limit scope</label>
+    <input type="radio" name="scope" value="1" id="radioScope0" class="radio" checked="checked"/>
+    <label for="radioScope0" class="label">0</label>
+    <input type="radio" name="scope" value="2" id="radioScope1" class="radio"/>
+    <label for="radioScope1" class="label">1</label>
+    <input type="radio" value="3" name="scope" id="radioScope2" class="radio"/>
+    <label for="radioScope2" class="label">2</label>
+  </div>
 			<div class="form-group">
 				<textarea class="textarea" id="output"></textarea>
 			</div>
