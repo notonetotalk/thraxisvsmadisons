@@ -182,3 +182,8 @@ body{
   font-weight:500;
   color:#666666;
 }
+@media (max-width: 380px){
+  .button{
+    max-width:138px;
+  }
+}
