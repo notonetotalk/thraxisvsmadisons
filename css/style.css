@@ -103,7 +103,7 @@ body {
   margin-right:0px;
   margin-bottom:15px;
   margin-left:0px;
-  background-color:rgb(120, 85, 128);
+  background-color:#666666;
   border-top-color:initial;
   border-top-style:none;
   border-top-width:initial;
@@ -141,7 +141,7 @@ body {
 }
 .button:active{
   box-shadow:-1px -1px 1px 0px rgba(0,0,0,0.15) ;
-  background-color:#6f5176;
+  background-color:#555555;
   color:#777777;
   color:#bfbfbf;
 }
@@ -174,7 +174,7 @@ body{
   padding-left:10px;
   width:100%;
   max-width:300px;
-  margin:0px auto 0px auto;
+  margin:0px auto 50px auto;
 }
 .c4442{
   font-family:Arial, Helvetica, sans-serif;
