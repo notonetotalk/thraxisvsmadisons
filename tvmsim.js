@@ -5621,13 +5621,7 @@
       H.printString(H.S(object));
     },
     bool: {
-      "^": "Object;",
-      get$hashCode: function(_) {
-        return P.Object.prototype.get$hashCode.call(this, this);
-      },
-      toString$0: function(_) {
-        return this ? "true" : "false";
-      }
+      "^": "Object;"
     },
     "+bool": 0,
     double: {
@@ -6478,30 +6472,30 @@
       W._EventStreamSubscription$(t1._html$_target, t1._eventType, Z.tvmsim__simulate$closure(), false, H.getTypeArgumentByIndex(t1, 0));
     }, "call$0", "tvmsim__main$closure", 0, 0, 1],
     simulate: [function($event) {
-      var t1, rounds, stepsT, stepsM, stpTotalT, stpTotalM, outputText, i, code, stpT, stpM;
+      var t1, rounds, stpTotalT, stpTotalM, outputText, i, code, stpT, stpM;
       t1 = document;
       rounds = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#num"), "$isInputElement").value, null, null);
-      stepsT = P.LinkedHashMap__makeLiteral(["AAA", 1, "AAB", 2, "AAC", 3, "ABA", 3, "ABB", 3, "ABC", 3, "ACA", 4, "ACB", 4, "ACC", 3, "BAA", 4, "BAB", 4, "BAC", 6, "BBA", 5, "BBB", 2, "BBC", 3, "BCA", 4, "BCB", 4, "BCC", 3, "CAA", 5, "CAB", 5, "CAC", 4, "CBA", 5, "CBB", 5, "CBC", 4, "CCA", 5, "CCB", 5, "CCC", 3]);
-      stepsM = P.LinkedHashMap__makeLiteral(["AAA", 1, "AAB", 3, "AAC", 4, "ABA", 3, "ABB", 3, "ABC", 2, "ACA", 4, "ACB", 4, "ACC", 4, "BAA", 3, "BAB", 3, "BAC", 4, "BBA", 3, "BBB", 2, "BBC", 4, "BCA", 4, "BCB", 4, "BCC", 4, "CAA", 4, "CAB", 4, "CAC", 5, "CBA", 4, "CBB", 4, "CBC", 4, "CCA", 4, "CCB", 4, "CCC", 3]);
       if (typeof rounds !== "number")
         return H.iae(rounds);
       stpTotalT = 0;
       stpTotalM = 0;
       outputText = "";
       i = 0;
-      for (; i < rounds; ++i) {
+      for (; i < rounds;) {
         code = Z.rndCode();
-        stpT = stepsT.$index(0, code);
-        stpM = stepsM.$index(0, code);
+        stpT = $.$get$stepsT().$index(0, code);
+        stpM = $.$get$stepsM().$index(0, code);
         if (typeof stpT !== "number")
           return H.iae(stpT);
         stpTotalT += stpT;
         if (typeof stpM !== "number")
           return H.iae(stpM);
         stpTotalM += stpM;
-        outputText = outputText + (code + "\n") + ("Thraxis: " + H.S(stpT) + "\n") + ("Madison's: " + H.S(stpM) + "\n\n");
+        ++i;
+        outputText = outputText + ("Round " + i + ": " + code + "\n") + ("Thraxis:   " + stpT + ", total: " + stpTotalT + "\n") + ("Madison's: " + stpM + ", total: " + stpTotalM + "\n\n");
       }
-      outputText = outputText + "Average steps\n-------------\n" + ("Thraxis: " + H.S(stpTotalT / rounds) + "\n") + ("Madison's: " + H.S(stpTotalM / rounds));
+      outputText += "---END---";
+      outputText = "Average steps\n-------------\nThraxis:   " + H.S(stpTotalT / rounds) + "\nMadison's: " + H.S(stpTotalM / rounds) + "\n-------------\n\n" + outputText;
       t1.querySelector("#output").textContent = outputText;
     }, "call$1", "tvmsim__simulate$closure", 2, 0, 12],
     rndCode: function() {
@@ -6910,11 +6904,15 @@
     return t2;
   }, "Future__nullFuture", "_toStringVisiting", "$get$_toStringVisiting", function() {
     return [];
-  }, "_toStringVisiting"]);
+  }, "_toStringVisiting", "stepsT", "$get$stepsT", function() {
+    return P.LinkedHashMap__makeLiteral(["AAA", 1, "AAB", 2, "AAC", 3, "ABA", 3, "ABB", 3, "ABC", 3, "ACA", 4, "ACB", 4, "ACC", 3, "BAA", 4, "BAB", 4, "BAC", 6, "BBA", 5, "BBB", 2, "BBC", 3, "BCA", 4, "BCB", 4, "BCC", 3, "CAA", 5, "CAB", 5, "CAC", 4, "CBA", 5, "CBB", 5, "CBC", 4, "CCA", 5, "CCB", 5, "CCC", 3]);
+  }, "stepsT", "stepsM", "$get$stepsM", function() {
+    return P.LinkedHashMap__makeLiteral(["AAA", 1, "AAB", 3, "AAC", 4, "ABA", 3, "ABB", 3, "ABC", 2, "ACA", 4, "ACB", 4, "ACC", 4, "BAA", 3, "BAB", 3, "BAC", 4, "BBA", 3, "BBB", 2, "BBC", 4, "BCA", 4, "BCB", 4, "BCC", 4, "CAA", 4, "CAB", 4, "CAC", 5, "CBA", 4, "CBB", 4, "CBC", 4, "CCA", 4, "CCB", 4, "CCC", 3]);
+  }, "stepsM"]);
   Isolate = Isolate.$finishIsolateConstructor(Isolate);
   $ = new Isolate();
   init.metadata = [null];
-  init.types = [{func: 1}, {func: 1, v: true}, {func: 1, args: [,]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, args: [W.MouseEvent]}];
+  init.types = [{func: 1}, {func: 1, v: true}, {func: 1, args: [,]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, ret: P.bool, args: [W.MouseEvent]}];
   function convertToFastObject(properties) {
     function MyClass() {
     }

@@ -6,9 +6,12 @@
 		<link rel="stylesheet" href="./css/style.css">
 	</head>
 	<body>
-		<form class="form">
+		<form onsubmit="return false;" class="form">
+			<div class="c4437">Thraxis vs. Madison's Simulator
+				<br/>
+			</div>
 			<div class="form-group">
-				<input placeholder="# of rounds" type="text" class="input" id="num"/><button type="button" class="button" id="button">Simulate</button>
+				<input placeholder="# of rounds" type="text" class="input" id="num" pattern="[0-9]{1,10}" required/><button class="button" id="button">Simulate</button>
 			</div>
 			<div class="form-group">
 				<textarea class="textarea" id="output"></textarea>
