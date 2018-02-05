@@ -14,91 +14,88 @@ Go to the bottom of this document for the [TL;DR](#tldr).
 
 A method's speed is determined by its chances of using a greater or smaller number of steps to arrive at the correct code. The following is a breakdown of the number of steps involved in each method and the method's chances of using that number of steps.
 
-### Chances after `AAA -> 0 -> BBB -> 1/2`
+### Chances after `AAA -> 0`
 
 #### Thraxis:
 
 | # of steps | % chance | avg. steps for 100 rounds |
 |------------|---------:|--------------------------:|
-| 1 step     |   33.33% |                     33.33 |
-| 2 steps    |   33.33% |                     66.66 |
-| 3 steps    |   33.33% |                     99.99 |
+| 2 steps    |    12.5% |                        25 |
+| 3 steps    |    37.5% |                     112.5 |
+| 4 steps    |      25% |                     100.0 |
+| 5 steps    |      25% |                     125.0 |
 
-Average number of steps for correct outcome: 2.00
+Average number of steps for correct outcome: 3.625
 
 #### Madison's:
 
 | # of steps | % chance | avg. steps for 100 rounds |
 |------------|---------:|--------------------------:|
-| 2 steps    |     100% |                       200 |
+| 2 steps    |    12.5% |                        25 |
+| 3 steps    |    12.5% |                      37.5 |
+| 4 steps    |      75% |                       300 |
 
-Average number of steps for correct outcome: 2.00
+Average number of steps for correct outcome: 3.625
 
 Speed difference: 0%
 
-### Chances after `AAA -> 1 -> BBB/ABC`
+### Chances after `AAA -> 1`
 
 #### Thraxis:
 
 | # of steps | % chance | avg. steps for 100 rounds |
 |------------|---------:|--------------------------:|
-| 1 step     |   24.99% |                     24.99 |
-| 2 steps    |   33.33% |                     66.66 |
-| 3 steps    |   33.33% |                     99.99 |
-| 4 steps    |    8.33% |                     33.33 |
+| 3 step     |      25% |                        75 |
+| 4 steps    |   33.33% |                    133.33 |
+| 5 steps    |   33.33% |                    166.67 |
+| 6 steps    |    8.33% |                       500 |
 
-Average number of steps for correct outcome: 2.25
+Average number of steps for correct outcome: 4.25
 
 #### Madison's:
 
 | # of steps | % chance | avg. steps for 100 rounds |
 |------------|---------:|--------------------------:|
-| 1 step     |   27.27% |                     27.27 |
-| 2 steps    |   63.64% |                    127.27 |
-| 3 steps    |    9.09% |                     27.27 |
+| 2 step     |    8.33% |                     16.67 |
+| 3 step     |      25% |                        75 |
+| 4 steps    |   58.33% |                    233.33 |
+| 5 steps    |    8.33% |                     41.67 |
 
-Average number of steps for correct outcome: 1.82
+Average number of steps for correct outcome: 3.67
 
-Speed difference: 19.19%
+Speed difference: 13.73%
 
-### Chances after `AAA -> 2 -> AAB/ABC`
+### Chances after `AAA -> 2`
 
 #### Thraxis:
 
 | # of steps | % chance | avg. steps for 100 rounds |
 |------------|---------:|--------------------------:|
-| 1 step     |      40% |                        40 |
-| 2 steps    |      40% |                        80 |
-| 3 steps    |      20% |                        60 |
+| 2 steps    |   16.67% |                     33.33 |
+| 3 steps    |   33.33% |                       100 |
+| 4 steps    |   33.33% |                    133.33 |
+| 5 steps    |   16.67% |                     83.33 |
 
-Average number of steps for correct outcome: 1.80
+Average number of steps for correct outcome: 3.5
 
 #### Madison's:
 
 | # of steps | % chance | avg. steps for 100 rounds |
 |------------|---------:|--------------------------:|
-| 1 step     |      50% |                        50 |
-| 2 steps    |      50% |                       100 |
+| 3 step     |      50% |                       150 |
+| 4 steps    |      50% |                       200 |
 
-Average number of steps for correct outcome: 1.50
+Average number of steps for correct outcome: 3.50
 
-Speed difference: 16.67%
+Speed difference: 0%
 
 ### Conclusion
 
-These calculations would make Madison's about
-
-0% faster 31% of the time,
-
-19.19% faster 46% of the time, and
-
-16.67% faster 23% of the time,
-
-for a total speed increase of about 12.70% over Thraxis after the first two steps.
+These calculations would make Madison's about 0% faster 54% of the time, and 13.73% faster 46% of the time.
 
 ## The whole picture
 
-We can also account for the first two steps in overall speed. This can give us a better picture of just how much faster or slower one method is over another.
+Accounting for all the steps all at once can give us a better picture of just how much faster or slower one method is over another.
 
 #### Thraxis:
 
