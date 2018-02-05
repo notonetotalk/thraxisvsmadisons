@@ -22,8 +22,8 @@ A method's speed is determined by its chances of using a greater or smaller numb
 |------------|---------:|--------------------------:|
 | 2 steps    |    12.5% |                        25 |
 | 3 steps    |    37.5% |                     112.5 |
-| 4 steps    |      25% |                     100.0 |
-| 5 steps    |      25% |                     125.0 |
+| 4 steps    |      25% |                       100 |
+| 5 steps    |      25% |                       125 |
 
 Average number of steps for correct outcome: 3.625
 
@@ -85,7 +85,7 @@ Average number of steps for correct outcome: 3.5
 | 3 step     |      50% |                       150 |
 | 4 steps    |      50% |                       200 |
 
-Average number of steps for correct outcome: 3.50
+Average number of steps for correct outcome: 3.5
 
 Speed difference: 0%
 
@@ -95,7 +95,7 @@ These calculations would make Madison's about 0% faster 54% of the time, and 13.
 
 ## The whole picture
 
-Accounting for all the steps all at once can give us a better picture of just how much faster or slower one method is over another.
+Accounting for all steps at once can give us a better picture of just how much faster or slower one method is over another overall.
 
 #### Thraxis:
 
