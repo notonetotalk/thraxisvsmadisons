@@ -45,7 +45,7 @@ Speed difference: 0%
 
 | # of steps | % chance | avg. steps for 100 rounds |
 |------------|---------:|--------------------------:|
-| 3 step     |      25% |                        75 |
+| 3 steps    |      25% |                        75 |
 | 4 steps    |   33.33% |                    133.33 |
 | 5 steps    |   33.33% |                    166.67 |
 | 6 steps    |    8.33% |                       500 |
@@ -56,8 +56,8 @@ Average number of steps for correct outcome: 4.25
 
 | # of steps | % chance | avg. steps for 100 rounds |
 |------------|---------:|--------------------------:|
-| 2 step     |    8.33% |                     16.67 |
-| 3 step     |      25% |                        75 |
+| 2 steps    |    8.33% |                     16.67 |
+| 3 steps    |      25% |                        75 |
 | 4 steps    |   58.33% |                    233.33 |
 | 5 steps    |    8.33% |                     41.67 |
 
@@ -82,7 +82,7 @@ Average number of steps for correct outcome: 3.5
 
 | # of steps | % chance | avg. steps for 100 rounds |
 |------------|---------:|--------------------------:|
-| 3 step     |      50% |                       150 |
+| 3 steps    |      50% |                       150 |
 | 4 steps    |      50% |                       200 |
 
 Average number of steps for correct outcome: 3.5
