@@ -26,14 +26,15 @@ bool simulate(MouseEvent event) {
 
 	// Loops through randomized codes and tallies the number of steps
 	// necessary for each method to solve it, and keeps track of totals.
-	for (int i = 0; i < rounds; i++) {
+	int j = rounds + 1;
+	for (int i = 1; i < j; i++) {
 
 		String code = rndCode();
 		int stpT = stepsT[code];
 		int stpM = stepsM[code];
 		stpTotalT = stpTotalT + stpT;
 		stpTotalM = stpTotalM + stpM;
-		outputText = outputText + "Round ${i + 1}: ${code}\n";
+		outputText = outputText + "Round ${i}: ${code}\n";
 		//outputText = outputText + "${code}\n";
 		outputText = outputText + "Thraxis:   ${stpT}, total: ${stpTotalT}\n";
 		outputText = outputText + "Madison's: ${stpM}, total: ${stpTotalM}\n\n";

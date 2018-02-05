@@ -6472,16 +6472,17 @@
       W._EventStreamSubscription$(t1._html$_target, t1._eventType, Z.tvmsim__simulate$closure(), false, H.getTypeArgumentByIndex(t1, 0));
     }, "call$0", "tvmsim__main$closure", 0, 0, 1],
     simulate: [function($event) {
-      var t1, rounds, stpTotalT, stpTotalM, outputText, i, code, stpT, stpM;
+      var t1, rounds, j, stpTotalT, stpTotalM, outputText, i, code, stpT, stpM;
       t1 = document;
       rounds = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#num"), "$isInputElement").value, null, null);
-      if (typeof rounds !== "number")
-        return H.iae(rounds);
+      j = J.$add$ns(rounds, 1);
+      if (typeof j !== "number")
+        return H.iae(j);
       stpTotalT = 0;
       stpTotalM = 0;
       outputText = "";
-      i = 0;
-      for (; i < rounds;) {
+      i = 1;
+      for (; i < j; ++i) {
         code = Z.rndCode();
         stpT = $.$get$stepsT().$index(0, code);
         stpM = $.$get$stepsM().$index(0, code);
@@ -6491,10 +6492,11 @@
         if (typeof stpM !== "number")
           return H.iae(stpM);
         stpTotalM += stpM;
-        ++i;
         outputText = outputText + ("Round " + i + ": " + code + "\n") + ("Thraxis:   " + stpT + ", total: " + stpTotalT + "\n") + ("Madison's: " + stpM + ", total: " + stpTotalM + "\n\n");
       }
       outputText += "---END---";
+      if (typeof rounds !== "number")
+        return H.iae(rounds);
       outputText = "Average steps\n-------------\nThraxis:   " + H.S(stpTotalT / rounds) + "\nMadison's: " + H.S(stpTotalM / rounds) + "\n-------------\n\n" + outputText;
       t1.querySelector("#output").textContent = outputText;
     }, "call$1", "tvmsim__simulate$closure", 2, 0, 12],
