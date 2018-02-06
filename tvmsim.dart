@@ -16,7 +16,10 @@ void main() {
 bool simulate(MouseEvent event) {
 
 	// Get number input from textfield.
-	int rounds = int.parse((querySelector("#num") as InputElement).value);
+	InputElement numInput = querySelector("#num");
+	// Exits execution if input is not an interger.
+	if (int.parse(numInput.value, onError: (e) => null) == null) {return false;}
+	int rounds = int.parse(numInput.value);
 
 	// The following is a list of possible codes and the corresponding number of
 	// steps for each given method to solve it. stepsT contains the method speed

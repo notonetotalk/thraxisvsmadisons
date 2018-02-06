@@ -2036,7 +2036,9 @@
       return hash;
     },
     Primitives__parseIntError: function(source, handleError) {
-      throw H.wrapException(new P.FormatException(source, null, null));
+      if (handleError == null)
+        throw H.wrapException(new P.FormatException(source, null, null));
+      return handleError.call$1(source);
     },
     Primitives_parseInt: function(source, radix, handleError) {
       var match, decimalMatch;
@@ -6001,7 +6003,7 @@
     },
     HtmlElement: {
       "^": "Element;",
-      "%": "HTMLBRElement|HTMLBaseElement|HTMLButtonElement|HTMLCanvasElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDialogElement|HTMLDirectoryElement|HTMLDivElement|HTMLEmbedElement|HTMLFieldSetElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLIFrameElement|HTMLImageElement|HTMLKeygenElement|HTMLLIElement|HTMLLabelElement|HTMLLegendElement|HTMLLinkElement|HTMLMapElement|HTMLMarqueeElement|HTMLMenuElement|HTMLMenuItemElement|HTMLMetaElement|HTMLMeterElement|HTMLModElement|HTMLOListElement|HTMLObjectElement|HTMLOptGroupElement|HTMLOptionElement|HTMLOutputElement|HTMLParagraphElement|HTMLParamElement|HTMLPictureElement|HTMLPreElement|HTMLProgressElement|HTMLQuoteElement|HTMLScriptElement|HTMLShadowElement|HTMLSlotElement|HTMLSourceElement|HTMLSpanElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableDataCellElement|HTMLTableElement|HTMLTableHeaderCellElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTemplateElement|HTMLTextAreaElement|HTMLTitleElement|HTMLTrackElement|HTMLUListElement|HTMLUnknownElement;HTMLElement"
+      "%": "HTMLBRElement|HTMLBaseElement|HTMLCanvasElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDialogElement|HTMLDirectoryElement|HTMLDivElement|HTMLEmbedElement|HTMLFieldSetElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLIFrameElement|HTMLImageElement|HTMLKeygenElement|HTMLLabelElement|HTMLLegendElement|HTMLLinkElement|HTMLMapElement|HTMLMarqueeElement|HTMLMenuElement|HTMLMenuItemElement|HTMLMetaElement|HTMLModElement|HTMLOListElement|HTMLObjectElement|HTMLOptGroupElement|HTMLParagraphElement|HTMLPictureElement|HTMLPreElement|HTMLQuoteElement|HTMLScriptElement|HTMLShadowElement|HTMLSlotElement|HTMLSourceElement|HTMLSpanElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableDataCellElement|HTMLTableElement|HTMLTableHeaderCellElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTemplateElement|HTMLTitleElement|HTMLTrackElement|HTMLUListElement|HTMLUnknownElement;HTMLElement"
     },
     AnchorElement: {
       "^": "HtmlElement;",
@@ -6023,6 +6025,10 @@
       "^": "HtmlElement;",
       $isInterceptor: 1,
       "%": "HTMLBodyElement"
+    },
+    ButtonElement: {
+      "^": "HtmlElement;value=",
+      "%": "HTMLButtonElement"
     },
     CharacterData: {
       "^": "Node;length=",
@@ -6075,16 +6081,23 @@
       "%": "HTMLFormElement"
     },
     InputElement: {
-      "^": "HtmlElement;",
-      $isInputElement: 1,
+      "^": "HtmlElement;value=",
       $isInterceptor: 1,
       $isRadioButtonInputElement: 1,
       $isCheckboxInputElement: 1,
       "%": "HTMLInputElement"
     },
+    LIElement: {
+      "^": "HtmlElement;value=",
+      "%": "HTMLLIElement"
+    },
     MediaElement: {
       "^": "HtmlElement;error=",
       "%": "HTMLAudioElement|HTMLMediaElement|HTMLVideoElement"
+    },
+    MeterElement: {
+      "^": "HtmlElement;value=",
+      "%": "HTMLMeterElement"
     },
     MouseEvent: {
       "^": "UIEvent;",
@@ -6105,13 +6118,33 @@
       },
       "%": "Attr|Document|HTMLDocument|XMLDocument;Node"
     },
+    OptionElement: {
+      "^": "HtmlElement;value=",
+      "%": "HTMLOptionElement"
+    },
+    OutputElement: {
+      "^": "HtmlElement;value=",
+      "%": "HTMLOutputElement"
+    },
+    ParamElement: {
+      "^": "HtmlElement;value=",
+      "%": "HTMLParamElement"
+    },
+    ProgressElement: {
+      "^": "HtmlElement;value=",
+      "%": "HTMLProgressElement"
+    },
     SelectElement: {
-      "^": "HtmlElement;length=",
+      "^": "HtmlElement;length=,value=",
       "%": "HTMLSelectElement"
     },
     SpeechRecognitionError: {
       "^": "Event;error=",
       "%": "SpeechRecognitionError"
+    },
+    TextAreaElement: {
+      "^": "HtmlElement;value=",
+      "%": "HTMLTextAreaElement"
     },
     UIEvent: {
       "^": "Event;",
@@ -6470,9 +6503,13 @@
       W._EventStreamSubscription$(t1._html$_target, t1._eventType, Z.tvmsim__simulate$closure(), false, H.getTypeArgumentByIndex(t1, 0));
     }, "call$0", "tvmsim__main$closure", 0, 0, 1],
     simulate: [function($event) {
-      var t1, rounds, limitScope, j, t2, stpTotalT, stpTotalM, outputText, i, code, stpT, stpM;
+      var t1, numInput, t2, rounds, limitScope, j, stpTotalT, stpTotalM, outputText, i, code, stpT, stpM;
       t1 = document;
-      rounds = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#num"), "$isInputElement").value, null, null);
+      numInput = t1.querySelector("#num");
+      t2 = J.getInterceptor$x(numInput);
+      if (H.Primitives_parseInt(t2.get$value(numInput), null, new Z.simulate_closure()) == null)
+        return false;
+      rounds = H.Primitives_parseInt(t2.get$value(numInput), null, null);
       limitScope = H.interceptedTypeCast(t1.querySelector("#limitScope"), "$isCheckboxInputElement").checked;
       if (H.interceptedTypeCast(t1.querySelector("#radioScope0"), "$isRadioButtonInputElement").checked === true)
         $.scope = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#radioScope0"), "$isRadioButtonInputElement").value, null, null);
@@ -6519,6 +6556,12 @@
         code += t1[t2];
       }
       return code;
+    },
+    simulate_closure: {
+      "^": "Closure:2;",
+      call$1: function(e) {
+        return;
+      }
     }
   }, 1]];
   setupProgram(dart, 0);
