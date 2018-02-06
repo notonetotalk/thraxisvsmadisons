@@ -10,9 +10,6 @@ int scope;
 void main() {
 
 		querySelector("#button").onClick.listen(simulate);
-		querySelector("#radioScope0").onChange.listen(updateScope);
-		querySelector("#radioScope1").onChange.listen(updateScope);
-		querySelector("#radioScope2").onChange.listen(updateScope);
 
 }
 
@@ -30,21 +27,27 @@ bool simulate(MouseEvent event) {
 	int stpTotalM = 0;
 	String outputText = "";
 
-	// Loops through randomized codes and tallies the number of steps
-	// necessary for each method to solve it, and keeps track of totals.
+	// Checks if user has requested to limit the scope of the simulation.
 	bool limitScope = (querySelector("#limitScope") as CheckboxInputElement).checked;
 	updateScope();
-	print("Scope: ${scope}");
-	print("Limit scope? ${limitScope}");
+	// Loops through randomized codes and tallies the number of steps
+	// necessary for each method to solve it, and keeps track of totals.
 	int j = rounds + 1;
 	for (int i = 1; i < j; i++) {
+
 		String code = "AAA";
 		if (limitScope) {
+
+			// Randomizes a code until a desired one within the scope is found.
 			while (code.split("A").length != scope) {
+
 				code = rndCode();
+
 			}
 		} else {
+
 			code = rndCode();
+
 		}
 		int stpT = stepsT[code];
 		int stpM = stepsM[code];
@@ -65,15 +68,14 @@ bool simulate(MouseEvent event) {
 
 }
 
-updateScope([Event event]) {
+// Updates the scope value based on user input.
+updateScope() {
 
-	if (event != null) {
-		scope = int.parse((event.target as RadioButtonInputElement).value);
-	} else if ((querySelector("#radioScope0") as RadioButtonInputElement).checked) {
+	if ((querySelector("#radioScope0") as RadioButtonInputElement).checked) {
 		scope = int.parse((querySelector("#radioScope0") as RadioButtonInputElement).value);
 	} else if ((querySelector("#radioScope1") as RadioButtonInputElement).checked) {
 		scope = int.parse((querySelector("#radioScope1") as RadioButtonInputElement).value);
-	} else if ((querySelector("#radioScope2") as RadioButtonInputElement).checked) {
+	} else {
 		scope = int.parse((querySelector("#radioScope2") as RadioButtonInputElement).value);
 	}
 
