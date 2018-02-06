@@ -1,8 +1,13 @@
 import 'dart:html';
 import 'dart:math';
 
+
+// The following is a list of possible codes and the corresponding number of
+// steps for each given method to solve it. stepsT contains the method speed
+// information for Thraxis, stepsM for Madison's.
 final Map stepsT = {"AAA": 1, "AAB": 2, "AAC": 3, "ABA": 3, "ABB": 3, "ABC": 3, "ACA": 4, "ACB": 4, "ACC": 3, "BAA": 4, "BAB": 4, "BAC": 6, "BBA": 5, "BBB": 2, "BBC": 3, "BCA": 4, "BCB": 4, "BCC": 3, "CAA": 5, "CAB": 5, "CAC": 4, "CBA": 5, "CBB": 5, "CBC": 4, "CCA": 5, "CCB": 5, "CCC": 3};
 final Map stepsM = {"AAA": 1, "AAB": 3, "AAC": 4, "ABA": 3, "ABB": 3, "ABC": 2, "ACA": 4, "ACB": 4, "ACC": 4, "BAA": 3, "BAB": 3, "BAC": 4, "BBA": 3, "BBB": 2, "BBC": 4, "BCA": 4, "BCB": 4, "BCC": 4, "CAA": 4, "CAB": 4, "CAC": 5, "CBA": 4, "CBB": 4, "CBC": 4, "CCA": 4, "CCB": 4, "CCC": 3};
+// Initalize variables for use in functions.
 final List ltrs = ["A","B","C"];
 final Random rnd = new Random();
 int scope;
@@ -15,15 +20,11 @@ void main() {
 
 bool simulate(MouseEvent event) {
 
-	// Get number input from textfield.
 	InputElement numInput = querySelector("#num");
 	// Exits execution if input is not an interger.
 	if (int.parse(numInput.value, onError: (e) => null) == null) {return false;}
+	// Get number input from textfield.
 	int rounds = int.parse(numInput.value);
-
-	// The following is a list of possible codes and the corresponding number of
-	// steps for each given method to solve it. stepsT contains the method speed
-	// information for Thraxis, stepsM for Madison's.
 
 	// Initalize totals for adding up.
 	int stpTotalT = 0;
