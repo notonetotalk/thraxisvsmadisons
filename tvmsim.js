@@ -6503,24 +6503,24 @@
       W._EventStreamSubscription$(t1._html$_target, t1._eventType, Z.tvmsim__simulate$closure(), false, H.getTypeArgumentByIndex(t1, 0));
     }, "call$0", "tvmsim__main$closure", 0, 0, 1],
     simulate: [function($event) {
-      var t1, numInput, t2, rounds, limitScope, j, stpTotalT, stpTotalM, outputText, i, code, stpT, stpM;
+      var t1, numInput, t2, rounds, j, stpTotalT, stpTotalM, outputText, i, code, stpT, stpM;
       t1 = document;
       numInput = t1.querySelector("#num");
       t2 = J.getInterceptor$x(numInput);
       if (H.Primitives_parseInt(t2.get$value(numInput), null, new Z.simulate_closure()) == null)
         return false;
       rounds = H.Primitives_parseInt(t2.get$value(numInput), null, null);
-      limitScope = H.interceptedTypeCast(t1.querySelector("#limitScope"), "$isCheckboxInputElement").checked;
-      if (H.interceptedTypeCast(t1.querySelector("#radioScope0"), "$isRadioButtonInputElement").checked === true)
-        $.scope = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#radioScope0"), "$isRadioButtonInputElement").value, null, null);
-      else if (H.interceptedTypeCast(t1.querySelector("#radioScope1"), "$isRadioButtonInputElement").checked === true)
-        $.scope = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#radioScope1"), "$isRadioButtonInputElement").value, null, null);
-      else
-        $.scope = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#radioScope2"), "$isRadioButtonInputElement").value, null, null);
+      t2 = H.interceptedTypeCast(t1.querySelector("#limitScope"), "$isCheckboxInputElement").checked === true;
+      if (t2)
+        if (H.interceptedTypeCast(t1.querySelector("#radioScope0"), "$isRadioButtonInputElement").checked === true)
+          $.scope = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#radioScope0"), "$isRadioButtonInputElement").value, null, null);
+        else if (H.interceptedTypeCast(t1.querySelector("#radioScope1"), "$isRadioButtonInputElement").checked === true)
+          $.scope = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#radioScope1"), "$isRadioButtonInputElement").value, null, null);
+        else
+          $.scope = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#radioScope2"), "$isRadioButtonInputElement").value, null, null);
       j = J.$add$ns(rounds, 1);
       if (typeof j !== "number")
         return H.iae(j);
-      t2 = limitScope === true;
       stpTotalT = 0;
       stpTotalM = 0;
       outputText = "";

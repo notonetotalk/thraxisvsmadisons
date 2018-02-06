@@ -1,7 +1,6 @@
 import 'dart:html';
 import 'dart:math';
 
-
 // The following is a list of possible codes and the corresponding number of
 // steps for each given method to solve it. stepsT contains the method speed
 // information for Thraxis, stepsM for Madison's.
@@ -33,7 +32,7 @@ bool simulate(MouseEvent event) {
 
 	// Checks if user has requested to limit the scope of the simulation.
 	bool limitScope = (querySelector("#limitScope") as CheckboxInputElement).checked;
-	updateScope();
+	if (limitScope) {updateScope();}
 	// Loops through randomized codes and tallies the number of steps
 	// necessary for each method to solve it, and keeps track of totals.
 	int j = rounds + 1;
@@ -58,7 +57,6 @@ bool simulate(MouseEvent event) {
 		stpTotalT = stpTotalT + stpT;
 		stpTotalM = stpTotalM + stpM;
 		outputText = outputText + "\n\nRound ${i}: ${code}\n";
-		//outputText = outputText + "${code}\n";
 		outputText = outputText + "Thraxis:   ${stpT}, total: ${stpTotalT}\n";
 		outputText = outputText + "Madison's: ${stpM}, total: ${stpTotalM}";
 
