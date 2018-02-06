@@ -6001,9 +6001,12 @@
         return callback;
       return t1.bindUnaryCallback$2$runGuarded(callback, true);
     },
+    querySelector: function(selectors) {
+      return document.querySelector(selectors);
+    },
     HtmlElement: {
       "^": "Element;",
-      "%": "HTMLBRElement|HTMLBaseElement|HTMLCanvasElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDialogElement|HTMLDirectoryElement|HTMLDivElement|HTMLEmbedElement|HTMLFieldSetElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLIFrameElement|HTMLImageElement|HTMLKeygenElement|HTMLLabelElement|HTMLLegendElement|HTMLLinkElement|HTMLMapElement|HTMLMarqueeElement|HTMLMenuElement|HTMLMenuItemElement|HTMLMetaElement|HTMLModElement|HTMLOListElement|HTMLObjectElement|HTMLOptGroupElement|HTMLParagraphElement|HTMLPictureElement|HTMLPreElement|HTMLQuoteElement|HTMLScriptElement|HTMLShadowElement|HTMLSlotElement|HTMLSourceElement|HTMLSpanElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableDataCellElement|HTMLTableElement|HTMLTableHeaderCellElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTemplateElement|HTMLTitleElement|HTMLTrackElement|HTMLUListElement|HTMLUnknownElement;HTMLElement"
+      "%": "HTMLBRElement|HTMLBaseElement|HTMLCanvasElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDialogElement|HTMLDirectoryElement|HTMLDivElement|HTMLEmbedElement|HTMLFieldSetElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLIFrameElement|HTMLImageElement|HTMLKeygenElement|HTMLLabelElement|HTMLLegendElement|HTMLLinkElement|HTMLMapElement|HTMLMarqueeElement|HTMLMenuElement|HTMLMetaElement|HTMLModElement|HTMLOListElement|HTMLObjectElement|HTMLOptGroupElement|HTMLParagraphElement|HTMLPictureElement|HTMLPreElement|HTMLQuoteElement|HTMLScriptElement|HTMLShadowElement|HTMLSlotElement|HTMLSourceElement|HTMLSpanElement|HTMLStyleElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableDataCellElement|HTMLTableElement|HTMLTableHeaderCellElement|HTMLTableRowElement|HTMLTableSectionElement|HTMLTemplateElement|HTMLTitleElement|HTMLTrackElement|HTMLUListElement|HTMLUnknownElement;HTMLElement"
     },
     AnchorElement: {
       "^": "HtmlElement;",
@@ -6081,9 +6084,8 @@
       "%": "HTMLFormElement"
     },
     InputElement: {
-      "^": "HtmlElement;value=",
+      "^": "HtmlElement;checked=,value=",
       $isInterceptor: 1,
-      $isRadioButtonInputElement: 1,
       $isCheckboxInputElement: 1,
       "%": "HTMLInputElement"
     },
@@ -6094,6 +6096,10 @@
     MediaElement: {
       "^": "HtmlElement;error=",
       "%": "HTMLAudioElement|HTMLMediaElement|HTMLVideoElement"
+    },
+    MenuItemElement: {
+      "^": "HtmlElement;checked=",
+      "%": "HTMLMenuItemElement"
     },
     MeterElement: {
       "^": "HtmlElement;value=",
@@ -6503,21 +6509,22 @@
       W._EventStreamSubscription$(t1._html$_target, t1._eventType, Z.tvmsim__simulate$closure(), false, H.getTypeArgumentByIndex(t1, 0));
     }, "call$0", "tvmsim__main$closure", 0, 0, 1],
     simulate: [function($event) {
-      var t1, numInput, t2, rounds, j, stpTotalT, stpTotalM, outputText, i, code, stpT, stpM;
-      t1 = document;
-      numInput = t1.querySelector("#num");
-      t2 = J.getInterceptor$x(numInput);
-      if (H.Primitives_parseInt(t2.get$value(numInput), null, new Z.simulate_closure()) == null)
+      var rounds, t1, j, stpTotalT, stpTotalM, outputText, i, code, stpT, stpM;
+      rounds = H.Primitives_parseInt(J.get$value$x($.$get$numInput()), null, new Z.simulate_closure());
+      if (rounds == null)
         return false;
-      rounds = H.Primitives_parseInt(t2.get$value(numInput), null, null);
-      t2 = H.interceptedTypeCast(t1.querySelector("#limitScope"), "$isCheckboxInputElement").checked === true;
-      if (t2)
-        if (H.interceptedTypeCast(t1.querySelector("#radioScope0"), "$isRadioButtonInputElement").checked === true)
-          $.scope = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#radioScope0"), "$isRadioButtonInputElement").value, null, null);
-        else if (H.interceptedTypeCast(t1.querySelector("#radioScope1"), "$isRadioButtonInputElement").checked === true)
-          $.scope = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#radioScope1"), "$isRadioButtonInputElement").value, null, null);
-        else
-          $.scope = H.Primitives_parseInt(H.interceptedTypeCast(t1.querySelector("#radioScope2"), "$isRadioButtonInputElement").value, null, null);
+      if ($.$get$limitScope().checked === true) {
+        t1 = $.$get$radioScope0();
+        if (J.get$checked$x(t1) === true)
+          $.scope = H.Primitives_parseInt(J.get$value$x(t1), null, null);
+        else {
+          t1 = $.$get$radioScope1();
+          if (J.get$checked$x(t1) === true)
+            $.scope = H.Primitives_parseInt(J.get$value$x(t1), null, null);
+          else
+            $.scope = H.Primitives_parseInt(J.get$value$x($.$get$radioScope2()), null, null);
+        }
+      }
       j = J.$add$ns(rounds, 1);
       if (typeof j !== "number")
         return H.iae(j);
@@ -6526,7 +6533,7 @@
       outputText = "";
       i = 1;
       for (; i < j; ++i) {
-        if (t2)
+        if ($.$get$limitScope().checked === true)
           for (code = "AAA"; code.split("A").length !== $.scope;)
             code = Z.rndCode();
         else
@@ -6543,8 +6550,8 @@
       }
       if (typeof rounds !== "number")
         return H.iae(rounds);
-      outputText = "Average steps\n-------------\nThraxis:   " + H.S(stpTotalT / rounds) + "\nMadison's: " + H.S(stpTotalM / rounds) + "\n-------------" + outputText;
-      t1.querySelector("#output").textContent = outputText;
+      outputText = "Average steps\n-------------\n" + ("Thraxis:   " + H.S(stpTotalT / rounds) + "\n") + ("Madison's: " + H.S(stpTotalM / rounds) + "\n") + "-------------" + outputText;
+      document.querySelector("#output").textContent = outputText;
     }, "call$1", "tvmsim__simulate$closure", 2, 0, 12],
     rndCode: function() {
       var code, i, t1, t2;
@@ -6651,6 +6658,9 @@
       return receiver;
     return J.getNativeInterceptor(receiver);
   };
+  J.get$checked$x = function(receiver) {
+    return J.getInterceptor$x(receiver).get$checked(receiver);
+  };
   J.get$error$x = function(receiver) {
     return J.getInterceptor$x(receiver).get$error(receiver);
   };
@@ -6662,6 +6672,9 @@
   };
   J.get$onClick$x = function(receiver) {
     return J.getInterceptor$x(receiver).get$onClick(receiver);
+  };
+  J.get$value$x = function(receiver) {
+    return J.getInterceptor$x(receiver).get$value(receiver);
   };
   J.$add$ns = function(receiver, a0) {
     if (typeof receiver == "number" && typeof a0 == "number")
@@ -6963,7 +6976,17 @@
     return P.LinkedHashMap__makeLiteral(["AAA", 1, "AAB", 2, "AAC", 3, "ABA", 3, "ABB", 3, "ABC", 3, "ACA", 4, "ACB", 4, "ACC", 3, "BAA", 4, "BAB", 4, "BAC", 6, "BBA", 5, "BBB", 2, "BBC", 3, "BCA", 4, "BCB", 4, "BCC", 3, "CAA", 5, "CAB", 5, "CAC", 4, "CBA", 5, "CBB", 5, "CBC", 4, "CCA", 5, "CCB", 5, "CCC", 3]);
   }, "stepsT", "stepsM", "$get$stepsM", function() {
     return P.LinkedHashMap__makeLiteral(["AAA", 1, "AAB", 3, "AAC", 4, "ABA", 3, "ABB", 3, "ABC", 2, "ACA", 4, "ACB", 4, "ACC", 4, "BAA", 3, "BAB", 3, "BAC", 4, "BBA", 3, "BBB", 2, "BBC", 4, "BCA", 4, "BCB", 4, "BCC", 4, "CAA", 4, "CAB", 4, "CAC", 5, "CBA", 4, "CBB", 4, "CBC", 4, "CCA", 4, "CCB", 4, "CCC", 3]);
-  }, "stepsM", "ltrs", "$get$ltrs", function() {
+  }, "stepsM", "numInput", "$get$numInput", function() {
+    return W.querySelector("#numInput");
+  }, "numInput", "limitScope", "$get$limitScope", function() {
+    return H.interceptedTypeCast(W.querySelector("#limitScope"), "$isCheckboxInputElement");
+  }, "limitScope", "radioScope0", "$get$radioScope0", function() {
+    return W.querySelector("#radioScope0");
+  }, "radioScope0", "radioScope1", "$get$radioScope1", function() {
+    return W.querySelector("#radioScope1");
+  }, "radioScope1", "radioScope2", "$get$radioScope2", function() {
+    return W.querySelector("#radioScope2");
+  }, "radioScope2", "ltrs", "$get$ltrs", function() {
     return ["A", "B", "C"];
   }, "ltrs", "rnd", "$get$rnd", function() {
     return C.C__JSRandom;
