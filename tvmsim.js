@@ -6539,7 +6539,7 @@
         if (typeof stpM !== "number")
           return H.iae(stpM);
         stpTotalM += stpM;
-        outputText = outputText + ("\n\nRound " + i + ": " + code + "\n") + ("Thraxis:   " + stpT + ", total: " + stpTotalT + "\n") + ("Madison's: " + stpM + ", total: " + stpTotalM);
+        outputText = outputText + ("\n\nRound " + i + ": " + H.S(code) + "\n") + ("Thraxis:   " + stpT + ", total: " + stpTotalT + "\n") + ("Madison's: " + stpM + ", total: " + stpTotalM);
       }
       if (typeof rounds !== "number")
         return H.iae(rounds);
@@ -6548,12 +6548,12 @@
     }, "call$1", "tvmsim__simulate$closure", 2, 0, 12],
     rndCode: function() {
       var code, i, t1, t2;
-      for (code = "", i = 0; i < 3; ++i) {
+      for (code = null, i = 0; i < 3; ++i) {
         t1 = $.$get$ltrs();
         t2 = $.$get$rnd().nextInt$1(3);
         if (t2 < 0 || t2 >= 3)
           return H.ioore(t1, t2);
-        code += t1[t2];
+        code = C.JSNull_methods.$add(code, t1[t2]);
       }
       return code;
     },
@@ -6710,6 +6710,7 @@
   C.Interceptor_methods = J.Interceptor.prototype;
   C.JSArray_methods = J.JSArray.prototype;
   C.JSInt_methods = J.JSInt.prototype;
+  C.JSNull_methods = J.JSNull.prototype;
   C.JSNumber_methods = J.JSNumber.prototype;
   C.JSString_methods = J.JSString.prototype;
   C.JavaScriptFunction_methods = J.JavaScriptFunction.prototype;
