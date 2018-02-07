@@ -97,6 +97,7 @@ body {
   min-height:400px;
   font-size:14px;
   margin:15px 0px 15px 0px;
+  resize: none;
 }
 .button{
   width:100%;
@@ -142,6 +143,7 @@ body {
   vertical-align:middle;
   border-radius:3px;
   font-weight:bold;
+  outline: none;
 }
 .button:active{
   background-color:#555555;
