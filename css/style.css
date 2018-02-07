@@ -138,13 +138,17 @@ body {
   font-size:1em;
   cursor:pointer;
   max-width:150px;
-  box-shadow:1px 1px 1px 0px #2e2e2e ;
+  border-bottom:2px solid #555555;
+  vertical-align:middle;
+  border-radius:3px;
+  font-weight:bold;
 }
 .button:active{
-  box-shadow:-1px -1px 1px 0px rgba(0,0,0,0.15) ;
   background-color:#555555;
   color:#777777;
   color:#bfbfbf;
+  border-bottom:0px;
+  margin-top:17px;
 }
 button::-moz-focus-inner {
   border: 0 !important;
