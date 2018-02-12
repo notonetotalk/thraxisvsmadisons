@@ -90,19 +90,17 @@ bool simulate(MouseEvent event) {
   // Initalize totals for adding up.
   int stpTotalT = 0;
   int stpTotalM = 0;
-  String outputText = "";
-
-  // Checks if user has requested to limit the scope of the simulation.
-  if (limitScope.checked) {
-    updateScope();
-  }
+  String rndsOutput = "";
+  String avgOutput = "";
 
   // Loops through randomized codes and tallies the number of steps
   // necessary for each method to solve it, and keeps track of totals.
   int j = rounds + 1;
   for (int i = 1; i < j; i++) {
     String code = "AAA";
+    // Checks if user has requested to limit the scope of the simulation.
     if (limitScope.checked) {
+      updateScope();
       // Randomizes a code until a desired one within the scope is found.
       while (code.split("A").length != scope) {
         code = rndCode();
@@ -114,22 +112,21 @@ bool simulate(MouseEvent event) {
     int stpM = stepsM[code];
     stpTotalT = stpTotalT + stpT;
     stpTotalM = stpTotalM + stpM;
-    outputText = outputText +
+    rndsOutput = rndsOutput +
         "\n\nRound ${i}: ${code}\n" +
         "Thraxis:   ${stpT}, total: ${stpTotalT}\n" +
         "Madison's: ${stpM}, total: ${stpTotalM}";
   }
 
   // Calculates average number of steps taken for each method.
-  outputText = "Average steps\n" +
+  avgOutput = "Average steps\n" +
       "-------------\n" +
       "Thraxis:   ${stpTotalT / rounds}\n" +
       "Madison's: ${stpTotalM / rounds}\n" +
-      "-------------" +
-      outputText;
+      "-------------";
 
   // Outputs results to webpage.
-  querySelector("#output").text = outputText;
+  querySelector("#output").text = avgOutput + rndsOutput;
 }
 
 // Updates the scope value based on user input.
